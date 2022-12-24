@@ -1,11 +1,6 @@
-FROM node:14.14.0-buster-slim
+FROM node:current-buster-slim
 RUN whoami
-RUN npm install -g serverless@2.5.0; serverless -v
+RUN npm install -g serverless@3.26.0; serverless -v
 RUN apt-get update -y; apt-get install curl -y; apt-get install zip -y
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; unzip awscliv2.zip; ./aws/install
-RUN ls -lrth; ls -lrth ./.aws/; rm -fR awscliv2.zip
-RUN npm install serverless-aws-documentation --save-dev
-RUN npm install serverless-domain-manager --save-dev
-RUN npm install serverless-plugin-split-stacks --save-dev
 RUN apt-get install --reinstall make
-RUN aws --version
+WORKDIR /sls/package
